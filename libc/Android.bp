@@ -174,24 +174,11 @@ cc_defaults {
     name: "libc_native_allocator_defaults",
 
     whole_static_libs: [
+        "libjemalloc5",
+        "libc_jemalloc_wrapper",
         "libscudo",
     ],
-    cflags: [
-        "-DUSE_SCUDO",
-    ],
     header_libs: ["gwp_asan_headers"],
-    product_variables: {
-        malloc_low_memory: {
-            cflags: ["-UUSE_SCUDO"],
-            whole_static_libs: [
-                "libjemalloc5",
-                "libc_jemalloc_wrapper",
-            ],
-            exclude_static_libs: [
-                "libscudo",
-            ],
-        },
-    },
 }
 
 // Functions not implemented by jemalloc directly, or that need to
